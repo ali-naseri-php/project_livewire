@@ -14,6 +14,7 @@ class NewArticle extends Component
 
 {
     use WithFileUploads;
+    public $id;
 
 //    #[Validate('min:2|max:255|required')]
     public $name;
@@ -25,29 +26,70 @@ class NewArticle extends Component
     public $tags = [];
 
     public $body;
+    public function mount($id=null)
+    {
 
+        if ($id==null){
+            return '';
+        }
+        $this->id=$id;
+//        dd(Tag::where('article_id',$id)->select('tag_name')->get());
+        $tagswhere=Tag::where('article_id',$id)->select('tag_name')->get();
+        foreach ($tagswhere as $tags){
+            $this->tags[]=$tags->tag_name;
+        }
+        $valuarticle=Article::find($id);
+//        dd($valuarticle->image);
+        $this->body=$valuarticle->body;
+        $this->name=$valuarticle->title;
+        $this->image=$valuarticle->image;
+
+    }
     public function save()
     {
-        if (!$this->image) {
-            return $this->saveStatos = 'tel: ali_naseri_php';
-        }
+        if ($this->id==null) {
+            if (!$this->image) {
+                return $this->saveStatos = 'tel: ali_naseri_php';
+            }
 
-        $namefile = time() . '.' . $this->image->getClientOriginalExtension();
-        $post = $this->image->storeAs(path: 'public', name: $namefile);
-        event(new FileUploaded($namefile));
-        $article = new Article();
+            $namefile = time() . '.' . $this->image->getClientOriginalExtension();
+            $post = $this->image->storeAs(path: 'public', name: $namefile);
+            event(new FileUploaded($namefile));
+            $article = new Article();
+            $article->body = $this->body;
+            $article->image = 'images_post/' . $namefile;
+            $article->title = $this->name;
+            $article->user_id = Auth::user()->id;
+            $article->save();
+            foreach ($this->tags as $t) {
+                if ($t==null){
+                    continue;
+
+                }
+                $tag = new Tag();
+                $tag->tag_name = $t;
+                $tag->article_id = $article->id;
+                $tag->save();
+            }
+            $this->reset();
+            return '';
+        }
+        $article=Article::find($this->id);
         $article->body = $this->body;
-        $article->image = 'images_post/' . $namefile;
         $article->title = $this->name;
         $article->user_id = Auth::user()->id;
         $article->save();
+        Tag::where('article_id',$this->id)->delete();
         foreach ($this->tags as $t) {
+            if ($t==null){
+                continue;
+            }
             $tag = new Tag();
             $tag->tag_name = $t;
             $tag->article_id = $article->id;
             $tag->save();
         }
-        $this->reset();
+        return $this->redirect('/dashboard');
 
 
     }

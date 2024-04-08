@@ -9,4 +9,4 @@ Route::get('/dashboard',\App\Livewire\Article\DashboardArticle::class )->middlew
 Route::get('/articles/new',\App\Livewire\Article\NewArticle::class)->middleware(['auth'])->name('articles.new');
 Route::get('/articles/{article}',\App\Livewire\Article\ShowArticle::class)->middleware(['auth'])->name('articles.show');
 Route::get('/{whereTag}',\App\Livewire\Article\Home::class)->middleware(['auth'])->name('articles.where');
-
+Route::get('articles/{id}/edit' ,\App\Livewire\Article\NewArticle::class);

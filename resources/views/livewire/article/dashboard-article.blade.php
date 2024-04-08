@@ -7,7 +7,7 @@
 <div id="permissionWrapper" class="permissionWrapper">
 {{--    <label for="inputFilterPermission" class="listFilterLabel" id="lab_serch">serch</label>--}}
 {{--    <input id="inputFilterPermission" type="text" class="listFilterInput"/>--}}
-    <a id="addUser" href="#" class="iconAdd" title="Add new user"></a>
+    <a id="addUser" href="{{url('/articles/new')}}" class="iconAdd" title="Add new user"></a>
     <div class="clear"></div>
     <br>
     <table id="listFilterPermission" class="listFilterContainer permissionsTable" cellspacing="0" cellpadding="0">
@@ -27,10 +27,12 @@
         <tbody id="permissionsBody">
         <tr>
             <td>  <span contenteditable="true" class="userName">{{$val->title}}</span></td>
-            <td><div class="permissionTag active" data-perm="view" wire:click="viewClick({{$val->id}})" >View</div></td>
-            <td><div class="permissionTag active" data-perm="edit"wire:click="editClick({{$val->id}})">Edit</div></td>
+            <td><div class="permissionTag active" data-perm="view">
+                    <button wire:click="viewClick({{$val->id}})">View</button></div></td>
+            <td><div class="permissionTag active" data-perm="edit">
+                    <button wire:click="editClick({{$val->id}})">Edit</button></div></td>
 
-            <td><div class="permissionTag active" data-perm="admin">Delete</div></td>
+            <td><div class="permissionTag active" data-perm="admin"wire:click="deleteClick({{$val->id}})">Delete</div></td>
             <td><div class="permissionTag active" data-perm="admin"></div></td>
         </tr>
         </tbody>

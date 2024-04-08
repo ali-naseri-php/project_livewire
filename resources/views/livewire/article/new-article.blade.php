@@ -60,7 +60,7 @@
         <x-input-error :messages="$errors->get('newTag')" class="mt-2"/>
     </div>
 
-    @foreach($tags as $tag)
+    @foreach((array)$tags as  $tag)
         <span>#{{$tag}} </span>
 
     @endforeach
