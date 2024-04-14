@@ -15,7 +15,7 @@
                         <!-- Comments will be displayed here -->
                 <div class="comment">
                     <div class="comment-header">
-                        <h3 class="comment-author">{{$commant->user()->first()->name}}</h3>
+                        <h3 class="comment-author">{{$commant->user->name}}</h3>
                         <span class="comment-date">{{$commant->updated_at}}</span>
                     </div>
                     <p class="comment-text">{{$commant->mesige}}</p>

@@ -18,7 +18,7 @@ class ChatArticle extends Component
 
         $this->idArticle = $idArticle;
 
-        $this->commants= Mesige::where('interface', '=', $idArticle)->get();
+        $this->commants= Mesige::with('user')->where('interface', '=', $idArticle)->get();
 
 
 
