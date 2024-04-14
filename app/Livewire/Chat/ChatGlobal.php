@@ -19,14 +19,14 @@ class ChatGlobal extends Component
 //        dd(Auth::user()->id);
         $this->masagewhere = $masagewhere;
         if ($this->masagewhere == null) {
-            $allmes = Mesige::where('interface', '=', 'chat')->select('mesige', 'user_id')->get();
+            $allmes = Mesige::where('interface', '=', 'chat')->orderBy('created_at', 'desc')->select('mesige', 'user_id')->get();
             foreach ($allmes as $mes) {
 
 //                dd($mes);
                 $this->mesiges [] = ['mesige'=>$mes['mesige'],'user_id'=>$mes['user_id']];
             }
         } else {
-            $allmes = Mesige::where('interface', '=', $this->masagewhere)->select('mesige', 'user_id')->get();
+            $allmes = Mesige::where('interface', '=', $this->masagewhere)->orderBy('created_at', 'desc')->select('mesige', 'user_id')->get();
             foreach ($allmes as $mes) {
                 $this->mesiges [] = ['mesige'=>$mes['mesige'],'user_id'=>$mes['user_id']];
             }
@@ -44,6 +44,7 @@ class ChatGlobal extends Component
         $mes->user_id=Auth::user()->id;
         $mes->save();
         $this->sms='';
+        $this->mesiges=[];
         $this->mount($this->masagewhere);
 
     }

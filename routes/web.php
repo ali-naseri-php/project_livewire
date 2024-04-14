@@ -23,6 +23,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/chat',\App\Livewire\Chat\ChatGlobal::class)->middleware(['auth'])->name('chat');
-
 require __DIR__.'/auth.php';
 require __DIR__.'/article.php';

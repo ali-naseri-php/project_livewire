@@ -18,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -46,6 +47,11 @@ class User extends Authenticatable
     public function  rp($token)
     {
         $url=Url('');
+
+    }
+    public function mesiges()
+    {
+        return $this->hasMany(Mesige::class);
 
     }
 }

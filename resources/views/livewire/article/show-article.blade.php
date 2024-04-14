@@ -4,7 +4,7 @@
 <div>
     <div class="article-container">
         <div class="image-container">
-            <img src="{{url($article->image)}}" alt="عکس شما">
+            <img src="{{url($article->image)}}" >
         </div>
         <div class="content">
             <h1>{{$article->title}}</h1>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-
+<livewire:Article.chat-article idArticle="{{$article->id}}"/>
 
 
 </div>

@@ -7,6 +7,10 @@
 
 
     <div class="chat-container">
+        <div class="input-container">
+            <input type="text" wire:model="sms" placeholder="Type your message...">
+            <button id="but" wire:click="send">Send</button>
+        </div>
         <div class="messages">
 
             @foreach($mesiges as $mesige)
@@ -18,10 +22,6 @@
                 @endif
             @endforeach
 
-        </div>
-        <div class="input-container">
-            <input type="text" wire:model="sms" placeholder="Type your message...">
-            <button id="but" wire:click="send">Send</button>
         </div>
     </div>
 

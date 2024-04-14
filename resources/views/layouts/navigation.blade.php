@@ -24,13 +24,14 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('articles.new')" :active="request()->routeIs('articles.new')">
-                        {{ __('add new article') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('chat')" :active="request()->routeIs('chat')">
                         {{ __('chat global') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('articles.new')" :active="request()->routeIs('articles.new')">
+                        {{ __('add new article') }}
                     </x-nav-link>
                 </div>
 
